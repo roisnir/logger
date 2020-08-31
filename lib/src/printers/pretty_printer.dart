@@ -35,20 +35,21 @@ class PrettyPrinter extends LogPrinter {
 
   static final levelEmojis = {
     Level.verbose: '',
-    Level.debug: '🐛 ',
-    Level.info: '💡 ',
-    Level.warning: '⚠️ ',
-    Level.error: '⛔ ',
-    Level.wtf: '👾 ',
+    Level.debug: String.fromCharCode(0x1f41b),
+    Level.info: String.fromCharCode(0x1f4a1),
+    Level.warning: String.fromCharCode(0x26a0),
+    Level.error: String.fromCharCode(0x26d4),
+    Level.wtf: String.fromCharCode(0x1f47e),
+
   };
 
   static final levelStrings = {
     Level.verbose: '',
-    Level.debug: '🐛DEBUG',
-    Level.info: '💡INFO',
+    Level.debug: 'DEBUG',
+    Level.info: 'INFO',
     Level.warning: 'WARN',
     Level.error: 'ERROR',
-    Level.wtf: '👾WTF',
+    Level.wtf: 'WTF',
   };
 
   /// Matches a stacktrace line as generated on Android/iOS devices.
