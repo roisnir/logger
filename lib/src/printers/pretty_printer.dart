@@ -274,7 +274,7 @@ class PrettyPrinter extends LogPrinter {
     var emoji = _getEmoji(level);
     final levelStr = _getLevelStr(level);
     for (var line in message.split('\n')) {
-      buffer.add(color('$verticalLine $emoji$levelStr$line'));
+      buffer.add(color('$verticalLine $emoji$levelStr $line'));
     }
     buffer.add(color(_bottomBorder));
 
