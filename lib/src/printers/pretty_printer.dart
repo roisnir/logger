@@ -42,6 +42,15 @@ class PrettyPrinter extends LogPrinter {
     Level.wtf: '👾 ',
   };
 
+  static final levelStrings = {
+    Level.verbose: '',
+    Level.debug: '🐛DEBUG',
+    Level.info: '💡INFO',
+    Level.warning: 'WARN',
+    Level.error: 'ERROR',
+    Level.wtf: '👾WTF',
+  };
+
   /// Matches a stacktrace line as generated on Android/iOS devices.
   /// For example:
   /// #1      Logger.log (package:logger/src/logger.dart:115:29)
@@ -61,6 +70,7 @@ class PrettyPrinter extends LogPrinter {
   final int lineLength;
   final bool colors;
   final bool printEmojis;
+  final bool printLevelStrings;
   final bool printTime;
 
   String _topBorder = '';
@@ -73,6 +83,7 @@ class PrettyPrinter extends LogPrinter {
     this.lineLength = 120,
     this.colors = true,
     this.printEmojis = true,
+    this.printLevelStrings = false,
     this.printTime = false,
   }) {
     _startTime ??= DateTime.now();
@@ -215,6 +226,14 @@ class PrettyPrinter extends LogPrinter {
     }
   }
 
+  String _getLevelStr(Level level) {
+    if (printLevelStrings) {
+      return levelStrings[level];
+    } else {
+      return '';
+    }
+  }
+
   List<String> _formatAndPrint(
     Level level,
     String message,
@@ -253,8 +272,9 @@ class PrettyPrinter extends LogPrinter {
     }
 
     var emoji = _getEmoji(level);
+    final levelStr = _getLevelStr(level);
     for (var line in message.split('\n')) {
-      buffer.add(color('$verticalLine $emoji$line'));
+      buffer.add(color('$verticalLine $emoji$levelStr$line'));
     }
     buffer.add(color(_bottomBorder));
 
